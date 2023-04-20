@@ -35,17 +35,18 @@ iter <- function(a, n0, y0, n1){
     n <- max(n0,n1)
     
     # error handling
-    if (m == 0){
+    # check for trivial case
+    if (n == m){
+        warning('Boundaries match! Returning initial y value.')
+        return(y0)
+    } else if (m == 0){
         warning('A boundary was set to 0! This would have resulted in an infite',
                 ' result. Replacing boundary with 1.')
         m <- 1
     }
     
     
-    # check for trivial case
-    if (n == m){
-        return(y0)
-    } 
+    
     # initialising
     y <- y0
     # iterating
@@ -60,7 +61,7 @@ iter <- function(a, n0, y0, n1){
 
 ## c
 
-iter(a=5, n0=0, y0=log((1+5)/5),n1=30)
+iter(a=5, n0=0, y0=log((1+5)/5),n1=0)
 iter(a=5, n0=50, y0=log((1+5)/5),n1=30)
 # with increasing n the factor 1/n gets progressively smaller, while not equal to
 # zero, meaning that each subsequent iteration increases the absolute value.
