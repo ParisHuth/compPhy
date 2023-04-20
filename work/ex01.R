@@ -27,3 +27,11 @@ for (i in seq_along(n)){
 legend('topleft',legend=n, col = colors,lty=1)
 
 ## b
+
+iter <- function(a, n0, y0, n1){
+    # strictly going from n->m doesnt need a case by case
+    n <- min(n0,n1)
+    m <- max(n0,n1)
+    
+    
+}
