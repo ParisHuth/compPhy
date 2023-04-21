@@ -47,11 +47,9 @@ def iter(a, n0, y0, n1):
     # returning finished result
     return y
    
-   
 ## c
 # running iter function
 iter(a=5, n0=0, y0=np.log((1+5)/5), n1=30)
 iter(a=5, n0=50, y0=np.log((1+5)/5), n1=30)
-# with increasing n the factor 1/n gets progressively smaller, while not equal to
-# zero, meaning that each subsequent iteration increases the absolute value.
-# convergence is dependent on the choice of the a
+
+
