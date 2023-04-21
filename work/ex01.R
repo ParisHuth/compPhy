@@ -44,16 +44,13 @@ iter <- function(a, n0, y0, n1){
                 ' result. Replacing boundary with 1.')
         m <- 1
     }
-    
-    
-    
+
     # initialising
     y <- y0
     # iterating
     for (i in m:n){
         y <- (1/i - a*y)
     }
-    
     
     # returning finished result
     return(y)
