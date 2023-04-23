@@ -1,1 +1,7 @@
-hello world
+usual workflow
+- git add .
+- git commit -m "this is what i did"
+- git push
+
+
+refresh per git pull
