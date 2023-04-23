@@ -5,3 +5,5 @@ usual workflow
 
 
 refresh per git pull
+
+Checking that everything works
