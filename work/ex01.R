@@ -49,7 +49,7 @@ iter <- function(a, n0, y0, n1){
     y <- y0
     # iterating
     for (i in m:n){
-        y <- (1/i - a*y)
+        y <- c(y,(1/i - a*y))
     }
     
     # returning finished result
