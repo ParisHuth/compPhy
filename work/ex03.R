@@ -1,6 +1,7 @@
 # Paris J. Huth: Gruppe 1
 # Q inich Pakal Figueroa Coc: Gruppe 5
 # Introduction to computation physics ex. 3
+
 # 4th Order Runge-Kutta Method
 # Define the RK4 step function
 rk4_step <- function(y0, x0, f, h, ...) {
@@ -46,7 +47,6 @@ for (i in c(0.01, 0.1, 0.5, 1, 2)) {
 x <- seq(0, 10, length.out = 100)
 lines(x, exp(-r * x), col = "red")
 
-min(exp(-4*x))
 #-----------------------------------------------------------------------------------------
 
 # Three body problem
@@ -57,7 +57,6 @@ m3 <- 1
 G <- 1
 
 y0 <- c(0.97000436, -0.24308753, -0.46620368, -0.43236573, 0, 0, 0.93240737, 0.86473146, -0.97000436, 0.24308753, -0.46620368, -0.43236573)
-# y0 <- c(0.97, -0.24, -0.466, -0.432, 0, 0, 0.932, 0.864, -0.97, 0.2431, 0.466, -0.432)
 t0 <- 0
 
 h <- function(x1, x2, y1, y2, z1, z2, m1, m2, m3) {
@@ -67,7 +66,7 @@ h <- function(x1, x2, y1, y2, z1, z2, m1, m2, m3) {
 }
 
 f <- function(x, t) {
-    result <- c(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
+    result <- numeric(12)
     # Körper 1
     result[1] <- x[3] # x1'
     result[2] <- x[4] # x2'
@@ -105,3 +104,32 @@ plot(result[[1]][,1], result[[1]][,2], type="l", xlab="x", ylab="y", main="Traje
 lines(result[[1]][,5], result[[1]][,6], col="red")
 # plot the trajectories of the third mass
 lines(result[[1]][,9], result[[1]][,10], col="blue")
+
+# b
+
+m1 <- 5
+m2 <- 4
+m3 <- 3
+M <- m1+m2+m3
+
+x1 <- c(0,0)
+x2 <- c(0,3)
+x3 <- c(4,0)
+o <- (x1*m1+x2*m2+x3*m3)/M
+
+x1 <- x1 - o
+x2 <- x2 - o
+x3 <- x3 - o
+
+
+y0 <- c(x1,0,0,x2,0,0,x3,0,0)
+result <- rk4(y0, t0, f, 0.009999, 10000)
+
+cat("o = ", o, "\n")
+cat("y0 = ", y0, "\n")
+
+plot(result[[1]][,1],result[[1]][,2], type="l", xlab="x", ylab="y", col="blue", main="Three Body Problem", xlim=c(-5,5), ylim=c(-5,5))
+points(result[[1]][,5],result[[1]][,6], type="l", xlab="x", ylab="y", col="red")
+points(result[[1]][,9],result[[1]][,10], type="l", xlab="x", ylab="y", col="green")
+legend("topleft", c("m1", "m2", "m3"), col=c("blue", "red", "green"), lty=1, cex=0.8)
+
