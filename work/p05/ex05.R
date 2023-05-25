@@ -23,15 +23,35 @@ tridiagaus <- function(A, b) {
         b[i] <- b[i] - m * b[i-1]
     }
     
-    # Back substitution
-    x <- numeric(n)
-    x[n] <- b[n] / A[n, n]
+    # # Back substitution
+    # x <- numeric(n)
+    # x[n] <- b[n] / A[n, n]
+    # 
+    # for (i in (n-1):1) {
+    #     x[i] <- (b[i] - A[i, i+1] * x[i+1]) / A[i, i]
+    # }
     
-    for (i in (n-1):1) {
-        x[i] <- (b[i] - A[i, i+1] * x[i+1]) / A[i, i]
+    return(list(A,b))
+}
+
+
+
+tridiagonalGaussianElimination <- function(A, b) {
+    n <- nrow(A)
+    
+    # Check if the dimensions of matrix A and vector b are valid
+    if (ncol(A) != n || length(b) != n) {
+        stop("Invalid input dimensions.")
     }
     
-    return(x)
+    # Forward elimination
+    for (i in 2:n) {
+        m <- A[i, i-1] / A[i-1, i-1]
+        A[i, i] <- A[i, i] - m * A[i-1, i]
+        b[i] <- b[i] - m * b[i-1]
+    }
+    
+    return(list(A = A, b = b))
 }
 
 
@@ -40,7 +60,7 @@ tridiagaus <- function(A, b) {
 # Example usage
 A <- matrix(c(2, -1, 0, -1, 2, -1, 0, -1, 2), nrow = 3, ncol = 3)
 b <- c(1, 2, 3)
-
+tridiagonalGaussianElimination(A,b)
 solution <- tridiagaus(A, b)
 print(solution)
 
@@ -118,10 +138,13 @@ N <- 10
 a <- rep(-1, N-1)
 b <- rep(3/2, N)
 c <- rep(-1, N-1)
+M <- matrix(c(rep(c(3/2,-1,rep(0,8),-1),9),3/2),ncol=10,byrow=TRUE)
+
 y <- rep(1/10, N)
 
 solution <- tridiagSolver(a, b, c, y)
 print(solution)
+
 
 # e 
 
@@ -134,4 +157,5 @@ solution <- tridiagSolver(a, b, c, y)
 deviation <- b * solution - c(rep(0, N-1), solution[-N]) - a * solution[-1] - y
 print(deviation)
 
-
+tridiagaus(M,solution)
+y
