@@ -1,6 +1,6 @@
 is.tridia <- function(A) {
     n <- nrow(A)
-    
+
     for (i in 1:(n-1)) {
         if (A[i+1, i] == 0 || A[i, i+1] == 0){
             return(FALSE)}
